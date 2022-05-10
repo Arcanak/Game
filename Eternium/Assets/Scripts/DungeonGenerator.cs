@@ -12,6 +12,10 @@ public class DungeonGenerator : MonoBehaviour
     private Tile topWallTile;
     [SerializeField]
     private Tile botWallTile;
+    [SerializeField]
+    private Tile leftWallTile;
+    [SerializeField]
+    private Tile rightWallTile;
     //Capas del mapa
     [SerializeField]
     private Tilemap groundMap;
@@ -70,9 +74,13 @@ public class DungeonGenerator : MonoBehaviour
                 Vector3Int pos = new Vector3Int(xMap, yMap, 0);
                 Vector3Int posBelow = new Vector3Int(xMap, yMap - 1, 0);
                 Vector3Int posAbove = new Vector3Int(xMap, yMap + 1, 0);
+                Vector3Int posRight = new Vector3Int(xMap + 1, yMap, 0);
+                Vector3Int posLeft = new Vector3Int(xMap -1, yMap, 0);
                 TileBase tile = groundMap.GetTile(pos);
                 TileBase tileBelow = groundMap.GetTile(posBelow);
                 TileBase tileAbove = groundMap.GetTile(posAbove);
+                TileBase tileRight = groundMap.GetTile(posRight);
+                TileBase tileLeft = groundMap.GetTile(posLeft);
                 if (tile == null)
                 {
                     pitMap.SetTile(pos, pitTile);
@@ -83,6 +91,12 @@ public class DungeonGenerator : MonoBehaviour
                     else if (tileAbove != null)
                     {
                         wallMap.SetTile(pos, botWallTile);
+                    }
+
+                    if(tileRight != null){
+                        wallMap.SetTile(pos, leftWallTile);
+                    }else if(tileLeft != null){
+                        wallMap.SetTile(pos, rightWallTile);
                     }
                 }
             }

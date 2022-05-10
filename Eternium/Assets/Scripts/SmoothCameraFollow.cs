@@ -11,6 +11,7 @@ public class SmoothCameraFollow : MonoBehaviour
     public Vector3 offset;
     void LateUpdate()
     {
+        //Follows the target (player)
         transform.position = target.position + offset;
     }
 }

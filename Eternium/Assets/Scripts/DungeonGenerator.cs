@@ -1,11 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
 public class DungeonGenerator : MonoBehaviour
 {
-
+    //Sprites del suelo, vacío y paredes
     [SerializeField]
     private Tile groundTile;
     [SerializeField]
@@ -14,37 +12,51 @@ public class DungeonGenerator : MonoBehaviour
     private Tile topWallTile;
     [SerializeField]
     private Tile botWallTile;
+    //Capas del mapa
     [SerializeField]
     private Tilemap groundMap;
     [SerializeField]
     private Tilemap pitMap;
     [SerializeField]
     private Tilemap wallMap;
-    [SerializeField]
-    private GameObject player;
+    //Probabilidad de que el generador se desvíe por una nueva ruta
     [SerializeField]
     private int deviationRate = 10;
+    //Probabilidad de que se genere una habitación
     [SerializeField]
     private int roomRate = 15;
+    //Máxima longitud de una ruta
     [SerializeField]
     private int maxRouteLength;
+    //Máximo número de rutas que puede hacer el generador
     [SerializeField]
     private int maxRoutes = 20;
 
-
+    //Contador de las rutas creadas
     private int routeCount = 0;
 
     private void Start()
     {
+        //Posición 0, 0
         int x = 0;
         int y = 0;
+        //Se declara la longitud de la ruta inicial
         int routeLength = 0;
+        //Generar primer cuadrado con radio 1 en 0, 0
+        /*
+            Genera 
+            [-x,1][0,1][1,1]
+            [-x,0][0,0][1,0]
+            [-x,-x][0,-x][1,-x]
+        */
         GenerateSquare(x, y, 1);
         Vector2Int previousPos = new Vector2Int(x, y);
         y += 3;
+        //Se aleja 3 tiles para generar otro cuadrado, creando una especie de pasillo inicial
         GenerateSquare(x, y, 1);
+        //Empieza la generación del mundo procedural
         NewRoute(x, y, routeLength, previousPos);
-
+        //Una vez acabada la generación, busca donde rellenar las paredes y el vacío
         FillWalls();
     }
 
@@ -89,6 +101,8 @@ public class DungeonGenerator : MonoBehaviour
                 int xOffset = x - previousPos.x; //0
                 int yOffset = y - previousPos.y; //3
                 int roomSize = 1; //Hallway size
+                //Probabilidad de generar una habitación
+                //TODO: asignar propiedades a las habitaciones
                 if (Random.Range(1, 100) <= roomRate)
                     roomSize = Random.Range(3, 6);
                 previousPos = new Vector2Int(x, y);
@@ -153,6 +167,12 @@ public class DungeonGenerator : MonoBehaviour
         }
     }
 
+    /*
+        Genera 
+        [-x,1][0,1][1,1]
+        [-x,0][0,0][1,0]
+        [-x,-x][0,-x][1,-x]
+    */
     private void GenerateSquare(int x, int y, int radius)
     {
         for (int tileX = x - radius; tileX <= x + radius; tileX++)

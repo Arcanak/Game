@@ -173,6 +173,7 @@ public class DungeonGenerator : MonoBehaviour
         [-x,0][0,0][1,0]
         [-x,-x][0,-x][1,-x]
     */
+    //Nueva posibilidad: Random tiles para algo de cambio en lo visual
     private void GenerateSquare(int x, int y, int radius)
     {
         for (int tileX = x - radius; tileX <= x + radius; tileX++)

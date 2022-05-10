@@ -36,7 +36,7 @@ public class DungeonGenerator : MonoBehaviour
     private int routeCount = 0;
 
     private void Start()
-    {
+    {        
         //Posición 0, 0
         int x = 0;
         int y = 0;

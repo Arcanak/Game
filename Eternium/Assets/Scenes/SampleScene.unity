@@ -130,6 +130,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1611551774734641566, guid: a335231c025d7b845a0fc9a50b41d169, type: 3}
+      propertyPath: m_UsedByComposite
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4819994480246330089, guid: a335231c025d7b845a0fc9a50b41d169, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -189,6 +193,61 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4819994480246330089, guid: a335231c025d7b845a0fc9a50b41d169, type: 3}
   m_PrefabInstance: {fileID: 1174803432}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1935472358 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8575943467948545457, guid: 517bc5b85ed90f14bb57d62493c947cd, type: 3}
+  m_PrefabInstance: {fileID: 8575943468721295826}
+  m_PrefabAsset: {fileID: 0}
+--- !u!19719996 &1935472360 stripped
+TilemapCollider2D:
+  m_CorrespondingSourceObject: {fileID: 8575943467948545461, guid: 517bc5b85ed90f14bb57d62493c947cd, type: 3}
+  m_PrefabInstance: {fileID: 8575943468721295826}
+  m_PrefabAsset: {fileID: 0}
+--- !u!66 &1935472363
+CompositeCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1935472358}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_GeometryType: 0
+  m_GenerationType: 0
+  m_EdgeRadius: 0
+  m_ColliderPaths:
+  - m_Collider: {fileID: 1935472360}
+    m_ColliderPaths: []
+  m_CompositePaths:
+    m_Paths: []
+  m_VertexDistance: 0.0005
+  m_OffsetDistance: 0.00005
+--- !u!50 &1935472364
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1935472358}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 7
 --- !u!1001 &3562608559413432270
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -257,6 +316,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 8575943467948545461, guid: 517bc5b85ed90f14bb57d62493c947cd, type: 3}
+      propertyPath: m_UsedByComposite
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8575943468534371068, guid: 517bc5b85ed90f14bb57d62493c947cd, type: 3}
       propertyPath: m_RootOrder
       value: 0

@@ -365,6 +365,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8575943468534371069, guid: 517bc5b85ed90f14bb57d62493c947cd, type: 3}
+      propertyPath: maxRoutes
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8575943468534371069, guid: 517bc5b85ed90f14bb57d62493c947cd, type: 3}
       propertyPath: deviationRate
       value: 10
       objectReference: {fileID: 0}

@@ -16,6 +16,8 @@ public class DungeonGenerator : MonoBehaviour
     private Tile leftWallTile;
     [SerializeField]
     private Tile rightWallTile;
+    [SerializeField]
+    private Tile roomTile;
     //Capas del mapa
     [SerializeField]
     private Tilemap groundMap;
@@ -23,6 +25,8 @@ public class DungeonGenerator : MonoBehaviour
     private Tilemap pitMap;
     [SerializeField]
     private Tilemap wallMap;
+    [SerializeField]
+    private Tilemap roomMap;
     //Probabilidad de que el generador se desvíe por una nueva ruta
     [SerializeField]
     private int deviationRate = 10;
@@ -35,6 +39,8 @@ public class DungeonGenerator : MonoBehaviour
     //Máximo número de rutas que puede hacer el generador
     [SerializeField]
     private int maxRoutes = 20;
+    [SerializeField]
+    DjistraMap djistraMap;
 
     //Contador de las rutas creadas
     private int routeCount = 0;
@@ -61,7 +67,8 @@ public class DungeonGenerator : MonoBehaviour
         //Empieza la generación del mundo procedural
         NewRoute(x, y, routeLength, previousPos);
         //Una vez acabada la generación, busca donde rellenar las paredes y el vacío
-        FillWalls();
+        FillWalls();        
+        djistraMap.assignTileValues();
     }
 
     private void FillWalls()
@@ -196,7 +203,14 @@ public class DungeonGenerator : MonoBehaviour
             {
                 Vector3Int tilePos = new Vector3Int(tileX, tileY, 0);
                 groundMap.SetTile(tilePos, groundTile);
+                if(radius > 1){
+                    roomMap.SetTile(tilePos, roomTile);
+                }
             }
         }
+    }
+
+    private void DelimiteRooms(){
+
     }
 }

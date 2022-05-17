@@ -6,31 +6,59 @@ using UnityEngine.Tilemaps;
 public class DjistraMap : MonoBehaviour
 {
     [SerializeField]
-    private Tilemap groundTileMap;
-    private Dictionary<TileBase, int> tileValue = new Dictionary<TileBase, int>();
+    private Tile djistraTile;
+    [SerializeField]
+    private Tilemap roomTileMap;
+    public List<Vector3Int> tileValue = new List<Vector3Int>();
+    private List<Vector3Int> roomTiles = new List<Vector3Int>();
+    public List<Tilemap> rooms = new List<Tilemap>();
 
-    // Start is called before the first frame update
-    void Start()
+    public void assignTileValues()
     {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
-    void assignTileValues()
-    {        
-        for (int x = groundTileMap.cellBounds.min.x; x < groundTileMap.cellBounds.max.x; x++)
+        int number = 0;
+        foreach (var position in roomTileMap.cellBounds.allPositionsWithin)
         {
-            for (int y = groundTileMap.cellBounds.min.y; y < groundTileMap.cellBounds.max.y; y++)
+            if (!roomTileMap.HasTile(position))
             {
-                TileBase tile =  groundTileMap.GetTile(new Vector3Int(x, y, 0));                
-
-                tileValue.Add(tile, Mathf.Abs(x) + Mathf.Abs(y));               
+                continue;
             }
+            TileBase tile = roomTileMap.GetTile(position);
+            if (tileValue.Count > 0)
+            {
+                Vector3Int lastPos = tileValue[tileValue.Count - 1];
+                if ((position.x > lastPos.x + 1) && (position.y > lastPos.y - 1))
+                {
+                    string roomName = "room" + number;                    
+                    differentiateRooms(roomName);
+                    number++;
+                }
+                roomTiles.Add(position);
+            }
+            tileValue.Add(position);
+            //djistraTileMap.SetTile(position, djistraTile);           
         }
+    }
+
+    private Tilemap createTilemap(string roomName)
+    {
+        var go = new GameObject();
+        var room = go.AddComponent<Tilemap>();
+        var tr = go.AddComponent<TilemapRenderer>();
+
+        room.tileAnchor = new Vector3(0, 0, 0);
+        go.transform.SetParent(roomTileMap.transform);
+        tr.sortingLayerName = "Main";
+        return room;
+    }
+
+    private void differentiateRooms(string roomName)
+    {
+        Tilemap room = createTilemap(roomName);
+        foreach (var position in roomTiles)
+        {
+            room.SetTile(position, djistraTile);
+        }
+        rooms.Add(room);
+        roomTiles.Clear();
     }
 }

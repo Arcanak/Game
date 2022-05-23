@@ -44,15 +44,18 @@ public class DungeonGenerator : MonoBehaviour
     //[SerializeField]
     //DjistraMap djistraMap;
     public List<List<Vector3Int>> rooms = new List<List<Vector3Int>>();
-    private List<Tilemap> sameRooms = new List<Tilemap>();
+    private HashSet<List<Vector3Int>> sameRooms = new HashSet<List<Vector3Int>>();
     private List<GameObject> gos = new List<GameObject>();
 
     private int finalRooms = 0;
 
+    int count = 0;
+
 
     //Contador de las rutas creadas
     private int routeCount = 0;
-    private HashSet<List<Vector3Int>> listOfFinalRooms = new HashSet<List<Vector3Int>>();
+    private HashSet<List<Vector3Int>> listOfSameRooms = new HashSet<List<Vector3Int>>();
+    private HashSet<List<Vector3Int>> listOfMergedRooms = new HashSet<List<Vector3Int>>();
 
     private void Start()
     {
@@ -253,36 +256,55 @@ public class DungeonGenerator : MonoBehaviour
             foreach (var posList1 in rooms)
             {
                 List<Vector3Int> posListClone = new List<Vector3Int>(posList);
-                if (!(posList.Equals(posList1)))
+                if (!(posList.All(posList1.Contains) && posList.Count == posList1.Count))
                 {
                     IEnumerable<Vector3Int> intersection = posListClone.Intersect(posList1);
                     if (intersection.Count() > 0)
                     {
-                        List<Vector3Int> mergedRooms = new List<Vector3Int>(posListClone);
-                        mergedRooms.AddRange(posList1);
+                        HashSet<Vector3Int> mergedRooms = new HashSet<Vector3Int>(posListClone);
+                        mergedRooms.UnionWith(posList1);
                         bool sameRoom = false;
-                        foreach (var room in listOfFinalRooms)
+                        foreach (var room in listOfMergedRooms)
                         {
-                            room.Sort((a, b) => a.x.CompareTo(b.x));
-                            mergedRooms.Sort((a, b) => a.x.CompareTo(b.x));
-                            if (room.SequenceEqual(mergedRooms))
+                            if (room.All(mergedRooms.Contains) && room.Count == mergedRooms.Count)
                             {
                                 sameRoom = true;
+                                //listOfSameRooms.Add(room);
                                 break;
                             }
                         }
                         if (!sameRoom)
                         {
-                            listOfFinalRooms.Add(mergedRooms);
+                            listOfMergedRooms.Add(mergedRooms.ToList());
+                            //sameRooms.Add(mergedRooms);
                         }
                         break;
                     }
                 }
             }
         }
-        rooms.Clear();
-        rooms.AddRange(listOfFinalRooms);
-        if (listOfFinalRooms.Count == finalRooms)
+
+        List<List<Vector3Int>> roomsClone = new List<List<Vector3Int>>(rooms);
+        int roomCount1 = rooms.Count;
+        foreach (var room in rooms)
+        {
+            foreach (var mergedRoom in listOfMergedRooms)
+            {
+                IEnumerable<Vector3Int> intersection = room.Intersect(mergedRoom);
+                //&& !(room.All(mergedRoom.Contains) && room.Count == mergedRoom.Count)
+                if (intersection.Count() > 0)
+                {
+                    roomsClone.Remove(room);
+                }
+            }
+        }
+        Merge();
+        roomsClone.AddRange(listOfMergedRooms);
+
+        rooms = new List<List<Vector3Int>>(roomsClone);
+        int roomCount2 = rooms.Count;
+
+        if (roomCount1 == roomCount2)
         {
             for (int i = 0; i < rooms.Count; i++)
             {
@@ -294,8 +316,59 @@ public class DungeonGenerator : MonoBehaviour
             }
             return;
         }
-        finalRooms = listOfFinalRooms.Count;
         DefineFinalRooms();
+
+
+
+    }
+
+    HashSet<List<Vector3Int>> Merge()
+    {
+        HashSet<List<Vector3Int>> roomsToMergeClone = new HashSet<List<Vector3Int>>();
+        Dictionary<List<Vector3Int>, bool> roomHasMerged = new Dictionary<List<Vector3Int>, bool>();
+        foreach (var room in listOfMergedRooms)
+        {
+            roomHasMerged.Add(room, false);
+        }
+        foreach (var room in listOfMergedRooms)
+        {
+            foreach (var room1 in listOfMergedRooms)
+            {
+                if (!(room.All(room1.Contains) && room.Count == room1.Count))
+                {
+                    if (roomHasMerged[room] == false && roomHasMerged[room1] == false)
+                    {
+                        IEnumerable<Vector3Int> intersection = room.Intersect(room1);
+                        if (intersection.Count() > 0)
+                        {
+                            HashSet<Vector3Int> newRoom = new HashSet<Vector3Int>(room);
+                            newRoom.UnionWith(room1);
+                            roomsToMergeClone.Add(newRoom.ToList());
+                            roomHasMerged[room] = true;
+                            roomHasMerged[room1] = true;
+                            break;
+                        }
+                    }
+                }
+            }
+        }       
+
+        foreach(var room in listOfMergedRooms){
+            if(roomHasMerged[room] == false){
+                roomsToMergeClone.Add(room);
+            }
+        }    
+
+        listOfMergedRooms = new HashSet<List<Vector3Int>>(roomsToMergeClone);
+        
+        
+
+        if (!(listOfMergedRooms.Count == count))
+        {
+            count = listOfMergedRooms.Count;
+            Merge();
+        }
+        return listOfMergedRooms;
     }
 
     // Dictionary<string, List<Vector3Int>> roomsAsDictionaryNamePositions(){
@@ -365,7 +438,7 @@ public class DungeonGenerator : MonoBehaviour
     //         posVisited.Add(position);
     //     }
 
-    //     listOfFinalRooms.Add(posVisited);
+    //     listOfMergedRooms.Add(posVisited);
     // });
 
     // if (anyRoomMerged)
@@ -396,7 +469,7 @@ public class DungeonGenerator : MonoBehaviour
     //     }
     //     gos.Clear();
     //     rooms.Clear();
-    //     listOfFinalRooms.ForEach(room =>
+    //     listOfMergedRooms.ForEach(room =>
     //     {
     //         rooms.Add(createTilemap("room" + roomNum));
     //         roomNum++;

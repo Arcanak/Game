@@ -235,6 +235,7 @@ public class DungeonGenerator : MonoBehaviour
 
     }
 
+    //Crea el objeto que va a ser la ahbitación en el juego
     private Tilemap createTilemap(string roomName)
     {
         var go = new GameObject(roomName);
@@ -248,22 +249,37 @@ public class DungeonGenerator : MonoBehaviour
         return room;
     }
 
+    /*
+        El método recorre todas las posiciones que tienen las habitaciones y, las habitaciones que tengan posiciones conjuntas,
+        las une primero en una lista que será alterada después por el método Merge().
+        El cual devuelve una lista de habitaciones unidas y después esa lista es añadida al conjunto de habitaciones total.
+        Este conjunto de habitaciones total, es recorrido después de que el método se llame de forma recusiva para asegurar
+        la correcta unión de las habitaciones.
+    */
     private void DefineFinalRooms()
     {
         //Dictionary<string, List<Vector3Int>> roomsWithPos = roomsAsDictionaryNamePositions();
+
+        //Recorrer todas las posiciones en las habitaciones
         foreach (var posList in rooms)
         {
+            //Compararlas con las otras posiciones de la lista
             foreach (var posList1 in rooms)
             {
+                //Clon para no modificar la referencia
                 List<Vector3Int> posListClone = new List<Vector3Int>(posList);
                 if (!(posList.All(posList1.Contains) && posList.Count == posList1.Count))
                 {
+                    //Hace la intersección de donde se juntan las posiciones
                     IEnumerable<Vector3Int> intersection = posListClone.Intersect(posList1);
+                    //Si ha encontrado una posición compartida => intersection.Count() > 0
                     if (intersection.Count() > 0)
                     {
                         HashSet<Vector3Int> mergedRooms = new HashSet<Vector3Int>(posListClone);
+                        //Une las habitaciones
                         mergedRooms.UnionWith(posList1);
                         bool sameRoom = false;
+                        //Recorre la lista de habitaciones unidas para ver si ya está dentro la que se acaba de crear
                         foreach (var room in listOfMergedRooms)
                         {
                             if (room.All(mergedRooms.Contains) && room.Count == mergedRooms.Count)
@@ -273,6 +289,7 @@ public class DungeonGenerator : MonoBehaviour
                                 break;
                             }
                         }
+                        //Si no está, la añade
                         if (!sameRoom)
                         {
                             listOfMergedRooms.Add(mergedRooms.ToList());
@@ -285,7 +302,10 @@ public class DungeonGenerator : MonoBehaviour
         }
 
         List<List<Vector3Int>> roomsClone = new List<List<Vector3Int>>(rooms);
+        //Conteo de habitaciones antes de mergear
         int roomCount1 = rooms.Count;
+        //Recorre la lista de habiaciones unidas para eliminar las habitaciones simples
+        //que comparten espacio con las unidas
         foreach (var room in rooms)
         {
             foreach (var mergedRoom in listOfMergedRooms)
@@ -298,14 +318,19 @@ public class DungeonGenerator : MonoBehaviour
                 }
             }
         }
+        //Junta las habitaciones de la lista listOfMergedRooms
         Merge();
+        //Añade las habitaciones a la lista de habitaciones simples
         roomsClone.AddRange(listOfMergedRooms);
 
         rooms = new List<List<Vector3Int>>(roomsClone);
+        //Conteo después del merge
         int roomCount2 = rooms.Count;
 
+        //Si son iguales, significa que no hay cambios
         if (roomCount1 == roomCount2)
         {
+            //Crea los GameObjects tilemaps y se les añade unas tiles para delimitar la zona
             for (int i = 0; i < rooms.Count; i++)
             {
                 Tilemap room = createTilemap("room" + i);
@@ -313,15 +338,23 @@ public class DungeonGenerator : MonoBehaviour
                 {
                     room.SetTile(pos, roomTile);
                 }
+                //Elimina el espacio en exceso fuera de donde están pintadas las casillas
+                room.CompressBounds();
             }
             return;
         }
+        //Vuelve a comprobar
         DefineFinalRooms();
 
 
 
     }
 
+    /*
+        Junta de forma recursiva las habitaciones de la lista de habitaciones para asegurarse de que no haya
+        habitaciones superpuestas
+        @Returns listOfMergedRooms lista de habitaciones sin superponer.
+    */
     HashSet<List<Vector3Int>> Merge()
     {
         HashSet<List<Vector3Int>> roomsToMergeClone = new HashSet<List<Vector3Int>>();

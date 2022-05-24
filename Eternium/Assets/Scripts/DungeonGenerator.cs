@@ -438,13 +438,17 @@ public class DungeonGenerator : MonoBehaviour
             roomAndType["EnemiesRoom"].Add(tuple.Key);
             index++;
         }
-        foreach(var tuple in roomAndType){
-            string rooms = "";
-            tuple.Value.ForEach(tilemap=>{
-                rooms += tilemap.ToString() + " ";
-            });
-            Debug.Log("Roomtype: " + tuple.Key + ", Values: " + rooms.Trim());
-        }
+
+
+        //Log below
+
+        // foreach(var tuple in roomAndType){
+        //     string rooms = "";
+        //     tuple.Value.ForEach(tilemap=>{
+        //         rooms += tilemap.ToString() + " ";
+        //     });
+        //     Debug.Log("Roomtype: " + tuple.Key + ", Values: " + rooms.Trim());
+        // }
 
     }
 

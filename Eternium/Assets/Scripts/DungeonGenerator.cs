@@ -43,9 +43,9 @@ public class DungeonGenerator : MonoBehaviour
     private int maxRoutes = 20;
     //[SerializeField]
     //DjistraMap djistraMap;
-    public List<List<Vector3Int>> rooms = new List<List<Vector3Int>>();
+    private List<List<Vector3Int>> rooms = new List<List<Vector3Int>>();
     private HashSet<List<Vector3Int>> sameRooms = new HashSet<List<Vector3Int>>();
-    private List<GameObject> gos = new List<GameObject>();
+    public List<GameObject> gos = new List<GameObject>();
 
     private int finalRooms = 0;
 

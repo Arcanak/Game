@@ -41,11 +41,12 @@ public class DungeonGenerator : MonoBehaviour
     //Máximo número de rutas que puede hacer el generador
     [SerializeField]
     private int maxRoutes = 20;
-    //[SerializeField]
-    //DjistraMap djistraMap;
+    [SerializeField]
+    DjistraMap djistraMap;
     private List<List<Vector3Int>> rooms = new List<List<Vector3Int>>();
     private HashSet<List<Vector3Int>> sameRooms = new HashSet<List<Vector3Int>>();
     public List<GameObject> gos = new List<GameObject>();
+    public Dictionary<string, List<Tilemap>> roomAndType = new Dictionary<string, List<Tilemap>>();
 
     private int finalRooms = 0;
 
@@ -79,9 +80,10 @@ public class DungeonGenerator : MonoBehaviour
         //Empieza la generación del mundo procedural
         NewRoute(x, y, routeLength, previousPos);
         //Una vez acabada la generación, busca donde rellenar las paredes y el vacío
-        FillWalls();
-        //djistraMap.assignTileValues();
+        FillWalls();        
         DefineFinalRooms();
+        djistraMap.AssignTileValues();
+        ClassifyRooms();
     }
 
     private void FillWalls()
@@ -236,7 +238,7 @@ public class DungeonGenerator : MonoBehaviour
     }
 
     //Crea el objeto que va a ser la ahbitación en el juego
-    private Tilemap createTilemap(string roomName)
+    private Tilemap CreateTilemap(string roomName)
     {
         var go = new GameObject(roomName);
         gos.Add(go);
@@ -333,7 +335,7 @@ public class DungeonGenerator : MonoBehaviour
             //Crea los GameObjects tilemaps y se les añade unas tiles para delimitar la zona
             for (int i = 0; i < rooms.Count; i++)
             {
-                Tilemap room = createTilemap("room" + i);
+                Tilemap room = CreateTilemap("room" + i);
                 foreach (var pos in rooms[i])
                 {
                     room.SetTile(pos, roomTile);
@@ -402,6 +404,48 @@ public class DungeonGenerator : MonoBehaviour
             Merge();
         }
         return listOfMergedRooms;
+    }
+
+    void ClassifyRooms(){
+        string[] roomTypes = new string[] {"SafeRoom", "StairsRoom", "EnemiesRoom", "TreasureRoom"};
+        for(int i = 0; i < roomTypes.Length;i++){
+            roomAndType.Add(roomTypes[i], new List<Tilemap>());
+        }       
+        //Linq query
+        var sortedDict = from entry in djistraMap.tilemapValues orderby entry.Value ascending select entry;
+        Dictionary<Tilemap, double> tilemapValues = new Dictionary<Tilemap, double>(sortedDict);
+        int index = 0;
+        bool trasureGen = false;        
+        foreach(var tuple in tilemapValues){
+            if(index == 0){
+                roomAndType["SafeRoom"].Add(tuple.Key);
+                index++;
+                continue;
+            }
+            if(index == tilemapValues.Count - 1){
+                roomAndType["StairsRoom"].Add(tuple.Key);
+                index++;
+                continue;
+            }
+            if(!trasureGen){
+                if(Random.Range(0, 100) <= 15){
+                    roomAndType["TreasureRoom"].Add(tuple.Key);
+                    trasureGen = true;
+                    index++;
+                    continue;
+                }
+            }
+            roomAndType["EnemiesRoom"].Add(tuple.Key);
+            index++;
+        }
+        foreach(var tuple in roomAndType){
+            string rooms = "";
+            tuple.Value.ForEach(tilemap=>{
+                rooms += tilemap.ToString() + " ";
+            });
+            Debug.Log("Roomtype: " + tuple.Key + ", Values: " + rooms.Trim());
+        }
+
     }
 
     // Dictionary<string, List<Vector3Int>> roomsAsDictionaryNamePositions(){

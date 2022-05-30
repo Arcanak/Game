@@ -11,7 +11,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - Items
   - 
   - 
   - 
@@ -40,4 +40,19 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Debug
+    uniqueID: 1986011513
+    locked: 0
+  - name: Ground
+    uniqueID: 2217114147
+    locked: 0
+  - name: Walls
+    uniqueID: 97553637
+    locked: 0
+  - name: Interactable Objects
+    uniqueID: 640590611
+    locked: 0
+  - name: Player and Entities
+    uniqueID: 842936303
     locked: 0

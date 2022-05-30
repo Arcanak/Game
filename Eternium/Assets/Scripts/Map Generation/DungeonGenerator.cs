@@ -43,6 +43,8 @@ public class DungeonGenerator : MonoBehaviour
     private int maxRoutes = 20;
     [SerializeField]
     DjistraMap djistraMap;
+    [SerializeField]
+    RoomGenerator roomGenerator;
     private List<List<Vector3Int>> rooms = new List<List<Vector3Int>>();
     private HashSet<List<Vector3Int>> sameRooms = new HashSet<List<Vector3Int>>();
     public List<GameObject> gos = new List<GameObject>();
@@ -84,6 +86,7 @@ public class DungeonGenerator : MonoBehaviour
         DefineFinalRooms();
         djistraMap.AssignTileValues();
         ClassifyRooms();
+        roomGenerator.GenerateStairs();
     }
 
     private void FillWalls()
@@ -336,6 +339,7 @@ public class DungeonGenerator : MonoBehaviour
             for (int i = 0; i < rooms.Count; i++)
             {
                 Tilemap room = CreateTilemap("room" + i);
+                room.tileAnchor = new Vector3(0.5f, 0.5f, 0);
                 foreach (var pos in rooms[i])
                 {
                     room.SetTile(pos, roomTile);
@@ -452,6 +456,7 @@ public class DungeonGenerator : MonoBehaviour
 
     }
 
+    
     // Dictionary<string, List<Vector3Int>> roomsAsDictionaryNamePositions(){
     //     Dictionary<string, List<Vector3Int>> roomsAndPositions = new Dictionary<string, List<Vector3Int>>();        
     //     int roomNumber = 0;

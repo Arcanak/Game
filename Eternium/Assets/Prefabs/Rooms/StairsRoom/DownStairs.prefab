@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6643504196681584127}
   - component: {fileID: 534353774585655882}
   - component: {fileID: 5891796647601013127}
+  - component: {fileID: -7441517411149651652}
   - component: {fileID: 6788702191321240896}
   m_Layer: 6
   m_Name: DownStairs
@@ -110,9 +111,22 @@ MonoBehaviour:
   roomRate: 15
   maxRouteLength: 200
   maxRoutes: 20
-  djistraMap: {fileID: 0}
-  roomGenerator: {fileID: 0}
   gos: []
+  upStairs: {fileID: 932624480809768898, guid: 1f4e15e3afb351c43a1ad9fc79f5c6cc, type: 3}
+  downStairs: {fileID: 932624480809768898}
+--- !u!114 &-7441517411149651652
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 932624480809768898}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c32d161149cf434c9ee6ce3e81fb523, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactionType: 3
 --- !u!61 &6788702191321240896
 BoxCollider2D:
   m_ObjectHideFlags: 0

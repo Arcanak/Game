@@ -10,12 +10,13 @@ public class InteractionSystem : MonoBehaviour
     public float detectionRadius = 1f;
     //Detection layer
     public LayerMask detectionLayer;
+    private GameObject go;
 
     void Update()
     {
         if(DetectObject()){
             if(InteractInput()){
-                Debug.Log("INTERACTED");
+                go.GetComponent<Item>().Interact();
             }
         }
     }
@@ -25,7 +26,12 @@ public class InteractionSystem : MonoBehaviour
     }
 
     bool DetectObject(){
-        bool isDetected = Physics2D.OverlapCircle(detectionPoint.position, detectionRadius, detectionLayer);
-        return isDetected;
+        Collider2D obj = Physics2D.OverlapCircle(detectionPoint.position, detectionRadius, detectionLayer);
+        if(obj != null){
+            go = obj.gameObject;
+            return true;
+        }
+        go = null;
+        return false;
     }
 }

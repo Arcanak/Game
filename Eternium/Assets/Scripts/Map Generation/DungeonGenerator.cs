@@ -45,20 +45,15 @@ public class DungeonGenerator : MonoBehaviour
     DjistraMap djistraMap;
     [SerializeField]
     RoomGenerator roomGenerator;
-    private List<List<Vector3Int>> rooms = new List<List<Vector3Int>>();
-    private HashSet<List<Vector3Int>> sameRooms = new HashSet<List<Vector3Int>>();
+    private List<List<Vector3Int>> rooms = new List<List<Vector3Int>>();   
     public List<GameObject> gos = new List<GameObject>();
     public Dictionary<string, List<Tilemap>> roomAndType = new Dictionary<string, List<Tilemap>>();
-
-    private List<Tilemap> roomsTilemaps = new List<Tilemap>();
-    private int finalRooms = 0;
-
+    private List<Tilemap> roomsTilemaps = new List<Tilemap>();    
     int count = 0;
 
 
     //Contador de las rutas creadas
     private int routeCount = 0;
-    private HashSet<List<Vector3Int>> listOfSameRooms = new HashSet<List<Vector3Int>>();
     private HashSet<List<Vector3Int>> listOfMergedRooms = new HashSet<List<Vector3Int>>();
 
     private void Start()

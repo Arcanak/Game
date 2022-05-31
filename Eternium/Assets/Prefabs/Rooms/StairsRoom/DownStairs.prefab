@@ -112,6 +112,7 @@ MonoBehaviour:
   maxRouteLength: 200
   maxRoutes: 20
   gos: []
+  playerTransform: {fileID: 4819994480246330089, guid: a335231c025d7b845a0fc9a50b41d169, type: 3}
   upStairs: {fileID: 932624480809768898, guid: 1f4e15e3afb351c43a1ad9fc79f5c6cc, type: 3}
   downStairs: {fileID: 932624480809768898}
 --- !u!114 &-7441517411149651652

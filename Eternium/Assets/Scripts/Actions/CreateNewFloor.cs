@@ -50,16 +50,20 @@ public class CreateNewFloor : Item
     private HashSet<List<Vector3Int>> listOfMergedRooms = new HashSet<List<Vector3Int>>();
 
     private List<Tilemap> roomsMaps;    
-    public Dictionary<Tilemap, double> tilemapValues = new Dictionary<Tilemap, double>();   
+    public Dictionary<Tilemap, double> tilemapValues = new Dictionary<Tilemap, double>();
+    private GameObject player;
 
     public override void GenerateFloor()
     {
-       GenerateDungeon();
+        //Get player transform to 0,0,0
+        player.transform.position = new Vector3(0, 0, 0);
+        GenerateDungeon();
     }
 
     //Assign children of Grid to variables
     private void Awake()
     {
+        player = GameObject.Find("/Player 1");
         groundMap = GameObject.Find("Grid/Dynamic Ground").GetComponent<Tilemap>();
         pitMap = GameObject.Find("Grid/Dynamic Pit").GetComponent<Tilemap>();
         wallMap = GameObject.Find("Grid/Dynamic Walls").GetComponent<Tilemap>();

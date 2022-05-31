@@ -50,6 +50,7 @@ public class DungeonGenerator : MonoBehaviour
     public List<GameObject> gos = new List<GameObject>();
     public Dictionary<string, List<Tilemap>> roomAndType = new Dictionary<string, List<Tilemap>>();
 
+    private List<Tilemap> roomsTilemaps = new List<Tilemap>();
     private int finalRooms = 0;
 
     int count = 0;
@@ -62,6 +63,11 @@ public class DungeonGenerator : MonoBehaviour
 
     private void Start()
     {
+       GenerateDungeon();
+    }
+
+    public void GenerateDungeon(){
+        ClearTilemaps();
         //Posición 0, 0
         int x = 0;
         int y = 0;
@@ -346,6 +352,7 @@ public class DungeonGenerator : MonoBehaviour
                 }
                 //Elimina el espacio en exceso fuera de donde están pintadas las casillas
                 room.CompressBounds();
+                roomsTilemaps.Add(room);
             }
             return;
         }
@@ -442,8 +449,6 @@ public class DungeonGenerator : MonoBehaviour
             roomAndType["EnemiesRoom"].Add(tuple.Key);
             index++;
         }
-
-
         //Log below
 
         // foreach(var tuple in roomAndType){
@@ -455,6 +460,23 @@ public class DungeonGenerator : MonoBehaviour
         // }
 
     }
+
+    //Clear all tilemaps
+    void ClearTilemaps()
+    {
+        //Ground
+        groundMap.ClearAllTiles();
+        //Rooms        
+        foreach (var room in roomsTilemaps)
+        {
+            room.ClearAllTiles();
+        }
+        //Pit
+        pitMap.ClearAllTiles();
+        //Walls
+        wallMap.ClearAllTiles();        
+    }
+
 
     
     // Dictionary<string, List<Vector3Int>> roomsAsDictionaryNamePositions(){

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6643504196681584127}
   - component: {fileID: 534353774585655882}
-  - component: {fileID: 3530898655308105402}
+  - component: {fileID: 5891796647601013127}
   - component: {fileID: 6788702191321240896}
   m_Layer: 6
   m_Name: DownStairs
@@ -86,7 +86,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &3530898655308105402
+--- !u!114 &5891796647601013127
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -95,9 +95,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 932624480809768898}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 193160178a3b7394aab3c2075bab9706, type: 3}
+  m_Script: {fileID: 11500000, guid: 02107c6477c67f14db77c6a68e5abba6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  interactionType: 3
+  groundTile: {fileID: 11400000, guid: d65d967d7fe760145aefad4d5df8f396, type: 2}
+  pitTile: {fileID: 11400000, guid: f15cb6740d8f17844a6d5f4a8e1cb0c7, type: 2}
+  topWallTile: {fileID: 11400000, guid: 0971c45b0bd92ed44a82b49fb5a531b0, type: 2}
+  botWallTile: {fileID: 11400000, guid: 0971c45b0bd92ed44a82b49fb5a531b0, type: 2}
+  leftWallTile: {fileID: 11400000, guid: eaf2737e4522dc24fa4865bc99cbe386, type: 2}
+  rightWallTile: {fileID: 11400000, guid: eaf2737e4522dc24fa4865bc99cbe386, type: 2}
+  roomTile: {fileID: 11400000, guid: fae8e9d6141e69d45bfb4e213be6d599, type: 2}
+  deviationRate: 10
+  roomRate: 15
+  maxRouteLength: 200
+  maxRoutes: 20
+  djistraMap: {fileID: 0}
+  roomGenerator: {fileID: 0}
+  gos: []
 --- !u!61 &6788702191321240896
 BoxCollider2D:
   m_ObjectHideFlags: 0

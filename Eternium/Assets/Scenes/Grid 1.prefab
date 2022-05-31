@@ -510,7 +510,7 @@ MonoBehaviour:
   botWallTile: {fileID: 11400000, guid: 0971c45b0bd92ed44a82b49fb5a531b0, type: 2}
   leftWallTile: {fileID: 11400000, guid: eaf2737e4522dc24fa4865bc99cbe386, type: 2}
   rightWallTile: {fileID: 11400000, guid: eaf2737e4522dc24fa4865bc99cbe386, type: 2}
-  roomTile: {fileID: 11400000, guid: fae8e9d6141e69d45bfb4e213be6d599, type: 2}
+  roomTile: {fileID: 11400000, guid: f15cb6740d8f17844a6d5f4a8e1cb0c7, type: 2}
   groundMap: {fileID: 1633854369326679939}
   pitMap: {fileID: 1633854368501072646}
   wallMap: {fileID: 1633854368489569687}

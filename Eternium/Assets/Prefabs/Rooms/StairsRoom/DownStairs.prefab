@@ -106,13 +106,12 @@ MonoBehaviour:
   botWallTile: {fileID: 11400000, guid: 0971c45b0bd92ed44a82b49fb5a531b0, type: 2}
   leftWallTile: {fileID: 11400000, guid: eaf2737e4522dc24fa4865bc99cbe386, type: 2}
   rightWallTile: {fileID: 11400000, guid: eaf2737e4522dc24fa4865bc99cbe386, type: 2}
-  roomTile: {fileID: 11400000, guid: fae8e9d6141e69d45bfb4e213be6d599, type: 2}
+  roomTile: {fileID: 11400000, guid: f15cb6740d8f17844a6d5f4a8e1cb0c7, type: 2}
   deviationRate: 10
   roomRate: 15
   maxRouteLength: 200
   maxRoutes: 20
   gos: []
-  playerTransform: {fileID: 4819994480246330089, guid: a335231c025d7b845a0fc9a50b41d169, type: 3}
   upStairs: {fileID: 932624480809768898, guid: 1f4e15e3afb351c43a1ad9fc79f5c6cc, type: 3}
   downStairs: {fileID: 932624480809768898}
 --- !u!114 &-7441517411149651652

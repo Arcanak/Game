@@ -515,6 +515,8 @@ public class CreateNewFloor : Item
         foreach(var go in gos){
             Destroy(go);
         }
+        gos.Clear();
+        Destroy(downStairs);
     }
 
     [SerializeField]  

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 534353774585655882}
   - component: {fileID: 5891796647601013127}
   - component: {fileID: -7441517411149651652}
+  - component: {fileID: -2303650893211532262}
   - component: {fileID: 6788702191321240896}
   m_Layer: 6
   m_Name: DownStairs
@@ -112,6 +113,7 @@ MonoBehaviour:
   maxRouteLength: 200
   maxRoutes: 20
   gos: []
+  enemyService: {fileID: -2303650893211532262}
   upStairs: {fileID: 932624480809768898, guid: 1f4e15e3afb351c43a1ad9fc79f5c6cc, type: 3}
   downStairs: {fileID: 932624480809768898}
 --- !u!114 &-7441517411149651652
@@ -127,6 +129,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactionType: 3
+--- !u!114 &-2303650893211532262
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 932624480809768898}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f373bb27b655df4aadee7c839fabde7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dungeonGenerator: {fileID: 0}
+  createNewFloor: {fileID: 5891796647601013127}
+  enemies:
+  - {fileID: 1222899419526476653, guid: 898e3e79a14efac41beb7b450869454d, type: 3}
+  - {fileID: 5304680509445271780, guid: 8ac2882b52e181f4c8f4f251c22cf96a, type: 3}
 --- !u!61 &6788702191321240896
 BoxCollider2D:
   m_ObjectHideFlags: 0

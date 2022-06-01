@@ -53,11 +53,15 @@ public class CreateNewFloor : Item
     public Dictionary<Tilemap, double> tilemapValues = new Dictionary<Tilemap, double>();
     private GameObject player;
 
+    [SerializeField]
+    private EnemyService enemyService;
+
     public override void GenerateFloor()
     {
         //Get player transform to 0,0,0
         player.transform.position = new Vector3(0, 0, 0);
         GenerateDungeon();
+        enemyService.CreateNewFloorEnemies();
     }
 
     //Assign children of Grid to variables
@@ -513,6 +517,8 @@ public class CreateNewFloor : Item
         tilemapValues.Clear();
         roomAndType.Clear();        
         foreach(var go in gos){
+            //Destroy all gameobject's components
+            Destroy(go.GetComponent<Tilemap>());            
             Destroy(go);
         }
         gos.Clear();

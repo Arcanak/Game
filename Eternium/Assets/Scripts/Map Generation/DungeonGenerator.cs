@@ -56,9 +56,13 @@ public class DungeonGenerator : MonoBehaviour
     private int routeCount = 0;
     private HashSet<List<Vector3Int>> listOfMergedRooms = new HashSet<List<Vector3Int>>();
 
+    [SerializeField]
+    private EnemyService enemyService;
+
     private void Start()
     {
        GenerateDungeon();
+       enemyService.DungeonGeneratorEnemies();
     }
 
     public void GenerateDungeon(){

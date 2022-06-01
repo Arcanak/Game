@@ -189,6 +189,39 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a335231c025d7b845a0fc9a50b41d169, type: 3}
+--- !u!1 &1159574475 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1633854369080244959, guid: 27a704cce298f8441ab8346740e9c5e6, type: 3}
+  m_PrefabInstance: {fileID: 1633854367786023411}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1159574478 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1633854369080244956, guid: 27a704cce298f8441ab8346740e9c5e6, type: 3}
+  m_PrefabInstance: {fileID: 1633854367786023411}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1159574475}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25b865f5b4549c44eae82850b65cc21c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1159574481
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1159574475}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f373bb27b655df4aadee7c839fabde7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dungeonGenerator: {fileID: 1159574478}
+  createNewFloor: {fileID: 0}
+  enemies:
+  - {fileID: 1222899419526476653, guid: 898e3e79a14efac41beb7b450869454d, type: 3}
+  - {fileID: 5304680509445271780, guid: 8ac2882b52e181f4c8f4f251c22cf96a, type: 3}
 --- !u!1001 &1633854367786023411
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -200,6 +233,10 @@ PrefabInstance:
       propertyPath: roomTile
       value: 
       objectReference: {fileID: 11400000, guid: f15cb6740d8f17844a6d5f4a8e1cb0c7, type: 2}
+    - target: {fileID: 1633854369080244956, guid: 27a704cce298f8441ab8346740e9c5e6, type: 3}
+      propertyPath: enemyService
+      value: 
+      objectReference: {fileID: 1159574481}
     - target: {fileID: 1633854369080244957, guid: 27a704cce298f8441ab8346740e9c5e6, type: 3}
       propertyPath: m_RootOrder
       value: 0

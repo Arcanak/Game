@@ -15,7 +15,7 @@ MonoBehaviour:
   enemy: {fileID: 1222899419526476653, guid: 898e3e79a14efac41beb7b450869454d, type: 3}
   health: 100
   damage: 5
-  speed: 5
+  speed: 3
   attackRate: 3
   attackRange: 1
   detectRange: 7

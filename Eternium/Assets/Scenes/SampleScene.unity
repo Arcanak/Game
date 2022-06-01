@@ -187,6 +187,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5724394079094085601, guid: a335231c025d7b845a0fc9a50b41d169, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a335231c025d7b845a0fc9a50b41d169, type: 3}
 --- !u!1 &1159574475 stripped
@@ -229,6 +233,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1633854368489569680, guid: 27a704cce298f8441ab8346740e9c5e6, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1633854368501072647, guid: 27a704cce298f8441ab8346740e9c5e6, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1633854369080244956, guid: 27a704cce298f8441ab8346740e9c5e6, type: 3}
       propertyPath: roomTile
       value: 
@@ -284,6 +296,10 @@ PrefabInstance:
     - target: {fileID: 1633854369080244959, guid: 27a704cce298f8441ab8346740e9c5e6, type: 3}
       propertyPath: m_Name
       value: Grid
+      objectReference: {fileID: 0}
+    - target: {fileID: 1633854369326679964, guid: 27a704cce298f8441ab8346740e9c5e6, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 27a704cce298f8441ab8346740e9c5e6, type: 3}

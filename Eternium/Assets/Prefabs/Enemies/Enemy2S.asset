@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61f2c4ecc3cee8c429975a21b76e1b1d, type: 3}
+  m_Name: Enemy2S
+  m_EditorClassIdentifier: 
+  enemy: {fileID: 5304680509445271780, guid: 8ac2882b52e181f4c8f4f251c22cf96a, type: 3}
+  health: 120
+  damage: 2
+  speed: 3
+  attackRate: 2
+  attackRange: 1.5
+  detectRange: 7
+  enemyType: 0

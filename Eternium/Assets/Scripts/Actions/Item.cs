@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Collider2D))]
+
 public class Item : MonoBehaviour
 {    
     public enum InteractionType {NONE, Pickup, Use, GenerateFloor}
-    public InteractionType interactionType;
+    public InteractionType interactionType;    
 
-   private void Reset() {
+   private void Reset() {      
        GetComponent<Collider2D>().isTrigger = true;
    }
 

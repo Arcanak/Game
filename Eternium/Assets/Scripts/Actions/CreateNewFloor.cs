@@ -515,12 +515,13 @@ public class CreateNewFloor : Item
         listOfMergedRooms.Clear();
         roomsTilemaps.Clear();
         tilemapValues.Clear();
-        roomAndType.Clear();        
-        foreach(var go in gos){
-            //Destroy all gameobject's components
-            Destroy(go.GetComponent<Tilemap>());            
-            Destroy(go);
-        }
+        roomAndType.Clear();      
+        //Error trying to delete rooms  
+        // foreach(var go in gos){
+        //     //Destroy all gameobject's components
+        //     Destroy(go.GetComponent<Tilemap>());            
+        //     Destroy(go);
+        // }
         gos.Clear();
         Destroy(downStairs);
     }
@@ -529,6 +530,7 @@ public class CreateNewFloor : Item
     private GameObject upStairs;
     [SerializeField]
     private GameObject downStairs;
+    
 
 
 
@@ -545,7 +547,8 @@ public class CreateNewFloor : Item
         {
             Vector3 pos = GetRandomPosition(room.cellBounds);
             pos.x += xOffset; 
-            pos.y += yOffset;
+            pos.y += yOffset;           
+            downStairs.GetComponent<Collider2D>().enabled = true; 
             Instantiate(downStairs, pos, Quaternion.identity);
         }
     }
